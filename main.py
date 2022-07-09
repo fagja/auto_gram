@@ -28,7 +28,7 @@ def main():
     # タグ付けされたメディアデータをGET///
 
     # コンテナを作成(create)
-    create_url = f"{base_url}/v14.0/{ig_user_id}/media?image_url={image_url}&access_token={access_token}"
+    create_url = f"{base_url}/v14.0/{ig_user_id}/media?image_url={image_url}&access_token={access_token}"  # &caption=%23%E5%B9%B3%E6%B3%89
 
     response_create = requests.post(create_url)  # コンテナ作成
     create_json = response_create.json()  # json形式に変換
