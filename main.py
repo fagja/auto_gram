@@ -21,7 +21,7 @@ def main():
 
     response_get = requests.get(get_url)  # メディアデータを取得
     get_json = response_get.json()  # json形式に変換
-    image_url = get_json["data"][0]["media_url"].replace("&", "%26") # 必要なイメージURL
+    image_url = get_json["data"][0]["media_url"].replace("&", "%26")  # 必要なイメージURL
     # タグ付けされたメディアデータをGET///
 
     # コンテナを作成(create)
