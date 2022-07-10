@@ -14,26 +14,23 @@ base_url = "https://graph.facebook.com"
 
 def main():
     # タグ付けされたメディアデータをGET(get)
-    get_url = f"{base_url}/v14.0/{ig_user_id}/tags?fields=media_url, like_count&access_token={access_token}"
+    get_url = f"{base_url}/v14.0/{ig_user_id}/tags?fields=media_url, like_count, username, permalink&access_token={access_token}"
     response_get = requests.get(get_url)  # メディアデータを取得
     get_json = response_get.json()  # json形式に変換
-    # URLを取得
-    image_url = get_json["data"][0]["media_url"].replace("&", "%26")
-    # URLを取得///
 
-    # like数で抽出
-    # l = get_json["data"]
     max = get_json["data"][0]
     for i in get_json["data"]:
         if max["like_count"] < i["like_count"]:
             max = i
 
-    print(max)
-    # like数で抽出///
+    image_url = max["media_url"].replace("&", "%26")
+    owner_username = "@" + max["username"]
+    message = f"{owner_username} さん、ありがとうございます。"
+    tagged_post_url = max["permalink"]
     # タグ付けされたメディアデータをGET///
 
     # コンテナを作成(create)
-    create_url = f"{base_url}/v14.0/{ig_user_id}/media?image_url={image_url}&access_token={access_token}"
+    create_url = f"{base_url}/v14.0/{ig_user_id}/media?image_url={image_url}&caption=%23平泉, {message}, {tagged_post_url}&access_token={access_token}"  # &caption=%23%E5%B9%B3%E6%B3%89
 
     response_create = requests.post(create_url)  # コンテナ作成
     create_json = response_create.json()  # json形式に変換
