@@ -17,7 +17,7 @@ def main():
     get_url = f"{base_url}/v14.0/{ig_user_id}/tags?fields=media_url, like_count, username, permalink&access_token={access_token}"
     response_get = requests.get(get_url)  # メディアデータを取得
     get_json = response_get.json()  # json形式に変換
-    
+
     max = get_json["data"][0]
     for i in get_json["data"]:
         if max["like_count"] < i["like_count"]:
