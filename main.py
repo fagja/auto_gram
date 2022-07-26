@@ -17,7 +17,7 @@ def main():
     get_url = f"{base_url}/v14.0/{ig_user_id}/tags?fields=media_url, like_count, username, permalink&access_token={access_token}"
     response_get = requests.get(get_url)  # メディアデータを取得
     get_json = response_get.json()  # json形式に変換
-
+    
     max = get_json["data"][0]
     for i in get_json["data"]:
         if max["like_count"] < i["like_count"]:
@@ -34,7 +34,7 @@ def main():
         f"{base_url}/v14.0/{ig_user_id}/media?image_url={image_url}&caption={tagged_post_url}\n"
         f"{message}\n"
         f"%23平泉&access_token={access_token}"
-    )  # &caption=%23%E5%B9%B3%E6%B3%89"
+    )
 
     response_create = requests.post(create_url)  # コンテナ作成
     create_json = response_create.json()  # json形式に変換
